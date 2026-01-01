@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600&family=Space+Mono&display=swap');
+
+.registration-page {
+  padding: 40px 20px;
+  min-height: 100vh;
+  color: white;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 20px;
+  font-weight: 500;
+  opacity: 0.9;
+  transition: all 0.3s;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.back-link:hover {
+  opacity: 1;
+  transform: translateX(-5px);
+  color: #e94560;
+}
+
+header {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-family: 'Rajdhani', sans-serif;
+  color: white;
+}
+
+/* Dark Translucent Form */
+.form {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.form h2 {
+  margin: 30px 0 20px;
+  color: white;
+  border-bottom: 2px solid #e94560;
+  padding-bottom: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+}
+
+.form h2:first-of-type {
+  margin-top: 0;
+}
+
+.section-note {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.field-note {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 5px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Member Cards */
+.member-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+}
+
+.member-card h4 {
+  color: #e94560;
+  margin-bottom: 20px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-member-btn {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.remove-member-btn:hover {
+  background: rgba(239, 68, 68, 0.3);
+}
+
+.add-member-btn {
+  width: 100%;
+  padding: 15px;
+  background: rgba(99, 102, 241, 0.2);
+  border: 2px dashed rgba(99, 102, 241, 0.5);
+  color: #6366f1;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 20px;
+}
+
+.add-member-btn:hover {
+  background: rgba(99, 102, 241, 0.3);
+  border-color: #6366f1;
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: 'Space Mono', monospace;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #e94560;
+  box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.disabled-input {
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: white;
+}
+
+select {
+  cursor: pointer;
+  color: white;
+}
+
+select option {
+  background: #1a1a2e;
+  color: white;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Checkbox Styles */
+.checkbox-group {
+  margin-bottom: 15px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.checkbox-label span {
+  color: white;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: #e94560;
+}
+
+/* Radio Styles */
+.radio-group {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.radio-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 30px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.radio-option:hover {
+  border-color: #e94560;
+  background: rgba(233, 69, 96, 0.1);
+}
+
+.radio-option input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  cursor: pointer;
+  accent-color: #e94560;
+  margin: 0;
+}
+
+.radio-option label {
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.radio-option:has(input:checked) {
+  border-color: #e94560;
+  background: rgba(233, 69, 96, 0.15);
+}
+
+.radio-option:has(input:checked) label {
+  color: #e94560;
+  font-weight: 600;
+}
+
+/* Error Styles */
+.error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: block;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Submit Button Container */
+.submit-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.submit-btn-container .star-border-container {
+  width: 100%;
+}
+
+.submit-btn-container .inner-content {
+  width: 100%;
+}
+
+/* Message Styles */
+.message {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.success {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.message.error {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form {
+    padding: 25px;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+
+/* Rules Link */
+.rules-link {
+  color: #e94560;
+  text-decoration: underline;
+  transition: all 0.3s;
+}
+
+.rules-link:hover {
+  color: #6366f1;
+}
+  }
+  
+  .member-card {
+    padding: 20px;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .radio-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .radio-option {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .radio-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .radio-label {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

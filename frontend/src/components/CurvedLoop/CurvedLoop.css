@@ -1,0 +1,61 @@
+.curved-loop-jacket {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.curved-loop-svg {
+  user-select: none;
+  width: 100%;
+  aspect-ratio: 100 / 12;
+  overflow: visible;
+  display: block;
+  font-size: 3rem;
+  fill: #ffffff;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  animation: glitchText 4s infinite;
+}
+
+/* Glitch/Fuzzy effect */
+@keyframes glitchText {
+  0%, 90%, 100% {
+    filter: none;
+    opacity: 1;
+  }
+  92% {
+    filter: blur(1px);
+    opacity: 0.8;
+    transform: translateX(2px);
+  }
+  94% {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateX(-2px);
+  }
+  96% {
+    filter: blur(2px);
+    opacity: 0.7;
+    transform: translateX(1px);
+  }
+  98% {
+    filter: blur(0);
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Glow effect */
+.curved-loop-svg text {
+  filter: drop-shadow(0 0 10px rgba(233, 69, 96, 0.8))
+          drop-shadow(0 0 20px rgba(233, 69, 96, 0.4));
+}
