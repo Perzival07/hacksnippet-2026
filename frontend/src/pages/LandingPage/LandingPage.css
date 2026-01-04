@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
 
 .landing {
   color: white;
@@ -8,35 +8,106 @@
   position: relative;
 }
 
-.banner-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(5px);
-  border-bottom: 1px solid rgba(233, 69, 96, 0.3);
-}
-
 .hero {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: left;
+  text-align: center;
   padding: 40px 20px;
-  padding-top: 120px;
 }
 
 .hero-content {
   max-width: 1000px;
   width: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(10, 20, 15, 0.95);
   padding: 50px;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(97, 220, 163, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo-container {
+  margin-bottom: 30px;
+  display: inline-block;
+  position: relative;
+  z-index: 10;
+}
+
+/* Normal logo state with glow */
+.logo {
+  width: 200px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(97, 220, 163, 0.8));
+  transition: filter 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+/* Glitching logo state - BRIGHT and GLOWING */
+.logo.glitching {
+  animation: logoGlitchIntense 0.1s infinite;
+  z-index: 10;
+}
+
+@keyframes logoGlitchIntense {
+  0% {
+    transform: translate(0);
+    filter: brightness(2.5) drop-shadow(0 0 40px rgba(97, 220, 163, 1)) drop-shadow(0 0 80px rgba(97, 220, 163, 0.9)) drop-shadow(5px 0 0 #ff0044) drop-shadow(-5px 0 0 #00ffcc);
+  }
+
+  10% {
+    transform: translate(-5px, 3px) skewX(-5deg);
+    filter: brightness(3) drop-shadow(0 0 50px rgba(97, 220, 163, 1)) drop-shadow(0 0 100px rgba(97, 220, 163, 0.9)) drop-shadow(8px 0 0 #ff0044) drop-shadow(-8px 0 0 #00ffcc);
+  }
+
+  20% {
+    transform: translate(5px, -3px) skewX(5deg);
+    filter: brightness(2.2) drop-shadow(0 0 35px rgba(97, 220, 163, 0.9)) drop-shadow(0 0 70px rgba(97, 220, 163, 0.8)) drop-shadow(-66px 0 0 #ff0044) drop-shadow(6px 0 0 #00ffcc);
+  }
+
+  30% {
+    transform: translate(-3px, 0) skewX(-3deg);
+    filter: brightness(2.8) drop-shadow(0 0 45px rgba(97, 220, 163, 1)) drop-shadow(0 0 90px rgba(97, 220, 163, 0.9)) drop-shadow(4px 0 0 #ff0044) drop-shadow(-4px 0 0 #00ffcc);
+  }
+
+  40% {
+    transform: translate(3px, 3px) skewX(3deg);
+    filter: brightness(2.5) drop-shadow(0 0 40px rgba(97, 220, 163, 0.95)) drop-shadow(0 0 80px rgba(97, 220, 163, 0.85)) drop-shadow(-7px 0 0 #ff0044) drop-shadow(7px 0 0 #00ffcc);
+  }
+
+  50% {
+    transform: translate(0, -2px);
+    filter: brightness(3) drop-shadow(0 0 50px rgba(97, 220, 163, 1)) drop-shadow(0 0 100px rgba(97, 220, 163, 0.9)) drop-shadow(5px 0 0 #ff0044) drop-shadow(-5px 0 0 #00ffcc);
+  }
+
+  60% {
+    transform: translate(-4px, 2px) skewX(-4deg);
+    filter: brightness(2.3) drop-shadow(0 0 30px rgba(97, 220, 163, 0.85)) drop-shadow(0 0 60px rgba(97, 220, 163, 0.75)) drop-shadow(-4px 0 0 #ff0044) drop-shadow(4px 0 0 #00ffcc);
+  }
+
+  70% {
+    transform: translate(4px, -2px) skewX(4deg);
+    filter: brightness(2.8) drop-shadow(0 0 45px rgba(97, 220, 163, 1)) drop-shadow(0 0 90px rgba(97, 220, 163, 0.9)) drop-shadow(6px 0 0 #ff0044) drop-shadow(-6px 0 0 #00ffcc);
+  }
+
+  80% {
+    transform: translate(-2px, 3px);
+    filter: brightness(2.5) drop-shadow(0 0 40px rgba(97, 220, 163, 0.95)) drop-shadow(0 0 80px rgba(97, 220, 163, 0.85)) drop-shadow(-3px 0 0 #ff0044) drop-shadow(3px 0 0 #00ffcc);
+  }
+
+  90% {
+    transform: translate(2px, -3px) skewX(2deg);
+    filter: brightness(2.7) drop-shadow(0 0 35px rgba(97, 220, 163, 0.9)) drop-shadow(0 0 70px rgba(97, 220, 163, 0.8)) drop-shadow(5px 0 0 #ff0044) drop-shadow(-5px 0 0 #00ffcc);
+  }
+
+  100% {
+    transform: translate(0);
+    filter: brightness(2.5) drop-shadow(0 0 40px rgba(97, 220, 163, 1)) drop-shadow(0 0 80px rgba(97, 220, 163, 0.9)) drop-shadow(-5px 0 0 #ff0044) drop-shadow(5px 0 0 #00ffcc);
+  }
 }
 
 .hero h1 {
@@ -44,43 +115,20 @@
   font-weight: 900;
   margin-bottom: 20px;
   color: white;
-  min-height: 1.2em;
   font-family: 'Orbitron', sans-serif;
   letter-spacing: 2px;
-}
-
-.title-typing {
-  color: white;
-  font-size: inherit;
-  font-weight: inherit;
-  font-family: inherit;
-}
-
-.title-typing .text-type__cursor {
-  color: #e94560;
-  font-weight: 400;
+  text-align: center;
 }
 
 .tagline {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #e94560;
+  color: #61dca3;
   margin-bottom: 20px;
-  min-height: 1.5em;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: 'Orbitron', sans-serif;
   letter-spacing: 3px;
   text-transform: uppercase;
-}
-
-.tagline-typing {
-  color: #e94560;
-  font-size: inherit;
-  font-weight: inherit;
-  font-family: inherit;
-}
-
-.tagline-typing .text-type__cursor {
-  color: #e94560;
+  text-align: center;
 }
 
 .description {
@@ -88,34 +136,38 @@
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.8;
   margin-bottom: 40px;
-  min-height: 3em;
-  font-family: 'Space Mono', monospace;
-}
-
-.description-typing {
-  color: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  font-family: inherit;
-}
-
-.description-typing .text-type__cursor {
-  color: #6366f1;
+  font-family: monospace;
+  text-align: center;
+  max-width: 700px;
 }
 
 .hero-buttons {
   display: flex;
   gap: 20px;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
-.hero-buttons .star-border-container {
-  min-width: 220px;
-}
-
-.hero-buttons .inner-content {
+.register-btn {
+  display: inline-block;
   padding: 16px 40px;
   font-size: 1.1rem;
+  font-weight: 600;
+  color: #61dca3;
+  background: rgba(97, 220, 163, 0.1);
+  border: 2px solid rgba(97, 220, 163, 0.5);
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: sans-serif;
+}
+
+.register-btn:hover {
+  background: rgba(97, 220, 163, 0.2);
+  border-color: #61dca3;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(97, 220, 163, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -135,19 +187,11 @@
     padding: 30px 25px;
   }
 
-  .hero {
-    padding-top: 100px;
+  .logo {
+    width: 140px;
   }
 
-  .hero-buttons {
-    justify-content: center;
-  }
-
-  .hero-buttons .star-border-container {
-    min-width: 180px;
-  }
-
-  .hero-buttons .inner-content {
+  .register-btn {
     padding: 14px 30px;
     font-size: 1rem;
   }

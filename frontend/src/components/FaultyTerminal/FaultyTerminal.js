@@ -235,7 +235,7 @@ export default function FaultyTerminal({
   tint = '#ffffff',
   mouseReact = true,
   mouseStrength = 0.2,
-  dpr = Math.min(window.devicePixelRatio || 1, 1),
+  dpr = Math.min(window.devicePixelRatio || 1, 2),
   pageLoadAnimation = true,
   brightness = 1,
   className = '',
@@ -247,10 +247,13 @@ export default function FaultyTerminal({
   const rendererRef = useRef(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const smoothMouseRef = useRef({ x: 0.5, y: 0.5 });
-  const frozenTimeRef = useRef(0);
   const rafRef = useRef(0);
   const loadAnimationStartRef = useRef(0);
-  const timeOffsetRef = useRef(Math.random() * 100);
+
+  // NEW: Track animation time properly for pause/resume
+  const animationTimeRef = useRef(0);
+  const lastFrameTimeRef = useRef(0);
+  const wasPausedRef = useRef(false);
 
   const tintVec = useMemo(() => hexToRgb(tint), [tint]);
 
@@ -324,20 +327,24 @@ export default function FaultyTerminal({
     resizeObserver.observe(ctn);
     resize();
 
-    const update = t => {
+    const update = (t) => {
       rafRef.current = requestAnimationFrame(update);
 
       if (pageLoadAnimation && loadAnimationStartRef.current === 0) {
         loadAnimationStartRef.current = t;
       }
 
+      // Calculate delta time
+      const deltaTime = lastFrameTimeRef.current ? (t - lastFrameTimeRef.current) * 0.001 : 0;
+      lastFrameTimeRef.current = t;
+
+      // Only advance animation time when NOT paused
       if (!pause) {
-        const elapsed = (t * 0.001 + timeOffsetRef.current) * timeScale;
-        program.uniforms.iTime.value = elapsed;
-        frozenTimeRef.current = elapsed;
-      } else {
-        program.uniforms.iTime.value = frozenTimeRef.current;
+        animationTimeRef.current += deltaTime * timeScale;
       }
+
+      // Use our tracked animation time
+      program.uniforms.iTime.value = animationTimeRef.current;
 
       if (pageLoadAnimation && loadAnimationStartRef.current > 0) {
         const animationDuration = 2000;
@@ -359,24 +366,25 @@ export default function FaultyTerminal({
       }
 
       renderer.render({ scene: mesh });
+
+      wasPausedRef.current = pause;
     };
+
     rafRef.current = requestAnimationFrame(update);
     ctn.appendChild(gl.canvas);
 
-    if (mouseReact) ctn.addEventListener('mousemove', handleMouseMove);
+    if (mouseReact) window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       resizeObserver.disconnect();
-      if (mouseReact) ctn.removeEventListener('mousemove', handleMouseMove);
+      if (mouseReact) window.removeEventListener('mousemove', handleMouseMove);
       if (gl.canvas.parentElement === ctn) ctn.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       loadAnimationStartRef.current = 0;
-      timeOffsetRef.current = Math.random() * 100;
     };
   }, [
     dpr,
-    pause,
     timeScale,
     scale,
     gridMul,
@@ -395,6 +403,11 @@ export default function FaultyTerminal({
     brightness,
     handleMouseMove
   ]);
+
+  // Update pause state without recreating the whole effect
+  useEffect(() => {
+    wasPausedRef.current = pause;
+  }, [pause]);
 
   return <div ref={containerRef} className={`faulty-terminal-container ${className}`} style={style} {...rest} />;
 }

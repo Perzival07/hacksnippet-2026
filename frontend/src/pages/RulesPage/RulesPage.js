@@ -10,7 +10,7 @@ function RulesPage() {
 
         <header>
           <h1>📜 Rules & Code of Conduct</h1>
-          <p>HackSnippet 2026 - Official Guidelines</p>
+          <p>Hack Snippet 4.0 - Official Guidelines</p>
         </header>
 
         <div className="rules-content">
@@ -20,7 +20,7 @@ function RulesPage() {
             <h2>🎯 General Rules</h2>
             <ul>
               <li>
-                <strong>Team Size:</strong> Each team must have a minimum of 5 members and a maximum of 6 members.
+                <strong>Team Size:</strong> Each team must have a minimum of 1 member and a maximum of 5 members.
               </li>
               <li>
                 <strong>Eligibility:</strong> All team members must be currently enrolled students with valid college ID.
@@ -116,7 +116,7 @@ function RulesPage() {
             <h2>✍️ Originality & Plagiarism Declaration</h2>
             <div className="declaration-box">
               <p>
-                By participating in HackSnippet 2026, you declare and agree that:
+                By participating in Hack Snippet 4.0, you declare and agree that:
               </p>
               <ul>
                 <li>
@@ -143,7 +143,7 @@ function RulesPage() {
             <h2>🔒 Data Privacy & Collection</h2>
             <div className="declaration-box">
               <p>
-                By registering for HackSnippet 2026, you consent to the following:
+                By registering for Hack Snippet 4.0, you consent to the following:
               </p>
               <ul>
                 <li>
@@ -181,7 +181,7 @@ function RulesPage() {
             <h2>📸 Photo & Video Recording Consent</h2>
             <div className="declaration-box">
               <p>
-                By participating in HackSnippet 2026, you consent to the following:
+                By participating in Hack Snippet 4.0, you consent to the following:
               </p>
               <ul>
                 <li>
@@ -250,10 +250,10 @@ function RulesPage() {
           {/* Agreement */}
           <section className="agreement-section">
             <p>
-              By registering for HackSnippet 2026, you acknowledge that you have read, understood, and agree to abide by all the rules, code of conduct, and declarations mentioned above.
+              By registering for Hack Snippet 4.0, you acknowledge that you have read, understood, and agree to abide by all the rules, code of conduct, and declarations mentioned above.
             </p>
             <Link to="/register" className="btn btn-primary">
-              Proceed to Registration 🚀
+              Proceed to Registration
             </Link>
           </section>
 

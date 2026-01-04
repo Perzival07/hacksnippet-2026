@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600&family=Space+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
 
 .rules-page {
   padding: 40px 20px;
@@ -14,20 +14,28 @@
 }
 
 .rules-page .back-link {
-  display: inline-block;
-  color: white;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #61dca3;
   text-decoration: none;
-  margin-bottom: 20px;
-  font-weight: 500;
-  opacity: 0.9;
-  transition: all 0.3s;
-  font-family: 'Rajdhani', sans-serif;
+  margin-bottom: 25px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 12px 24px;
+  background: rgba(97, 220, 163, 0.15);
+  border: 2px solid rgba(97, 220, 163, 0.5);
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  font-family: sans-serif;
 }
 
 .rules-page .back-link:hover {
-  opacity: 1;
+  background: rgba(97, 220, 163, 0.25);
+  border-color: #61dca3;
+  color: white;
   transform: translateX(-5px);
-  color: #e94560;
+  box-shadow: 0 5px 20px rgba(97, 220, 163, 0.3);
 }
 
 .rules-page header {
@@ -39,7 +47,7 @@
 .rules-page header h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
-  text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+  text-shadow: 0 0 20px rgba(97, 220, 163, 0.5);
   font-family: 'Orbitron', sans-serif;
   color: white;
 }
@@ -47,25 +55,24 @@
 .rules-page header p {
   font-size: 1.2rem;
   opacity: 0.9;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   color: white;
 }
 
 /* Rules Content */
 .rules-content {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(10, 20, 15, 0.95);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(97, 220, 163, 0.2);
 }
 
 /* Sections */
 .rules-section {
   margin-bottom: 40px;
   padding-bottom: 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(97, 220, 163, 0.2);
 }
 
 .rules-section:last-of-type {
@@ -79,13 +86,13 @@
   font-size: 1.5rem;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #e94560;
+  border-bottom: 2px solid #61dca3;
   display: inline-block;
 }
 
 .section-intro {
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 1.05rem;
   margin-bottom: 20px;
   line-height: 1.6;
@@ -98,7 +105,7 @@
 
 .rules-section ul li {
   color: white;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 1rem;
   margin-bottom: 15px;
   padding-left: 30px;
@@ -110,11 +117,11 @@
   content: '✦';
   position: absolute;
   left: 0;
-  color: #e94560;
+  color: #61dca3;
 }
 
 .rules-section ul li strong {
-  color: #e94560;
+  color: #61dca3;
 }
 
 /* Nested List */
@@ -130,13 +137,13 @@
 
 .nested-list li::before {
   content: '→' !important;
-  color: #6366f1 !important;
+  color: #7ed957 !important;
 }
 
 /* Highlight Section */
 .highlight-section {
-  background: rgba(233, 69, 96, 0.05);
-  border: 1px solid rgba(233, 69, 96, 0.2);
+  background: rgba(97, 220, 163, 0.05);
+  border: 1px solid rgba(97, 220, 163, 0.2);
   border-radius: 15px;
   padding: 25px;
   margin-bottom: 30px;
@@ -149,9 +156,9 @@
   padding: 20px;
 }
 
-.declaration-box > p {
+.declaration-box>p {
   color: white;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 1.05rem;
   margin-bottom: 15px;
 }
@@ -164,7 +171,7 @@
   padding: 15px;
   margin-top: 20px;
   color: #fca5a5;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 0.95rem;
 }
 
@@ -178,7 +185,7 @@
 
 .criteria-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(97, 220, 163, 0.2);
   border-radius: 15px;
   padding: 25px;
   text-align: center;
@@ -187,8 +194,8 @@
 
 .criteria-card:hover {
   transform: translateY(-5px);
-  border-color: #e94560;
-  background: rgba(233, 69, 96, 0.1);
+  border-color: #61dca3;
+  background: rgba(97, 220, 163, 0.1);
 }
 
 .criteria-icon {
@@ -199,21 +206,21 @@
 
 .criteria-card h4 {
   color: white;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 1.1rem;
   margin-bottom: 10px;
 }
 
 .criteria-card p {
   color: rgba(255, 255, 255, 0.7);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 0.9rem;
   margin-bottom: 15px;
 }
 
 .criteria-weight {
   display: inline-block;
-  background: linear-gradient(135deg, #e94560, #6366f1);
+  background: linear-gradient(135deg, #2b4539, #61dca3);
   color: white;
   padding: 5px 15px;
   border-radius: 20px;
@@ -244,7 +251,7 @@
   padding: 12px 20px;
   border-radius: 10px;
   color: white;
-  font-family: 'Space Mono', monospace;
+  font-family: monospace;
   font-size: 0.95rem;
 }
 
@@ -256,12 +263,12 @@
 .agreement-section {
   text-align: center;
   padding-top: 30px;
-  border-top: 2px solid rgba(233, 69, 96, 0.3);
+  border-top: 2px solid rgba(97, 220, 163, 0.3);
 }
 
 .agreement-section p {
   color: rgba(255, 255, 255, 0.9);
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
   font-size: 1.1rem;
   margin-bottom: 25px;
   line-height: 1.6;
@@ -276,18 +283,21 @@
   text-decoration: none;
   transition: all 0.3s;
   cursor: pointer;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: sans-serif;
 }
 
 .rules-page .btn-primary {
-  background: linear-gradient(135deg, #e94560, #6366f1);
-  color: white;
-  border: none;
+  background: rgba(97, 220, 163, 0.1);
+  border: 2px solid rgba(97, 220, 163, 0.5);
+  color: #61dca3;
 }
 
 .rules-page .btn-primary:hover {
+  background: rgba(97, 220, 163, 0.2);
+  border-color: #61dca3;
+  color: white;
   transform: translateY(-3px);
-  box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+  box-shadow: 0 10px 30px rgba(97, 220, 163, 0.3);
 }
 
 /* Responsive */

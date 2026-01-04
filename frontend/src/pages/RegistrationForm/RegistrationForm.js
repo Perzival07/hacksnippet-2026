@@ -1,80 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import StarBorder from '../../components/StarBorder/StarBorder';
 import './RegistrationForm.css';
 
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz8bdf8eSldGLKOoGzqS94qaOxe8AeQnhFxVb-G22Nv8w7LeP-V9DP0Q5aZUL_Wlhwy/exec';
-
-const ROLES = [
-  'Frontend Developer',
-  'Backend Developer',
-  'ML Engineer',
-  'UI/UX Designer',
-  'Presenter',
-  'Full Stack Developer',
-  'Data Analyst'
-];
-
-const CATEGORIES = [
-  'AI / Machine Learning',
-  'Web Development',
-  'Mobile App',
-  'IoT / Hardware',
-  'Blockchain',
-  'Social Impact',
-  'FinTech',
-  'HealthTech',
-  'EdTech',
-  'Cybersecurity',
-  'Other'
-];
-
-const DEPARTMENTS = [
-  'CSE',
-  'CSE (AI & ML)',
-  'CSE (Data Science)',
-  'CSE (Cybersecurity)',
-  'IT',
-  'ECE',
-  'EE',
-  'ME',
-  'CE',
-  'Other'
-];
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzU2ebbPjJXA6EcEmsZaF4FirKpWo9JSIghcOXbUTOg07qeEctZXF9iQgAMa51Pb1hm/exec';
 
 function RegistrationForm() {
-  const [teamSize, setTeamSize] = useState(5);
-  const [showMember6, setShowMember6] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-  const [errors, setErrors] = useState({});
-
-  const [formData, setFormData] = useState({
-    // Team Details
+  const [formState, setFormState] = useState({
     teamName: '',
-    teamSize: 5,
+    teamSize: 1,
 
-    // Leader (Member 1)
-    leader: {
-      fullName: '',
-      rollNumber: '',
-      department: '',
-      email: '',
-      phone: '',
-      role: 'Leader',
-      skills: ''
-    },
+    // Leader
+    leaderName: '',
+    leaderRoll: '',
+    leaderDept: '',
+    leaderEmail: '',
+    leaderPhone: '',
+    leaderSkills: '',
 
-    // Members 2-6
+    // Members array (for members 2-5)
     members: [
-      { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' },
-      { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' },
-      { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' },
-      { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' },
-      { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' }
+      { name: '', roll: '', dept: '', email: '', phone: '', role: '', skills: '' },
+      { name: '', roll: '', dept: '', email: '', phone: '', role: '', skills: '' },
+      { name: '', roll: '', dept: '', email: '', phone: '', role: '', skills: '' },
+      { name: '', roll: '', dept: '', email: '', phone: '', role: '', skills: '' },
     ],
 
-    // Project Idea
+    // Project
     ideaTitle: '',
     category: '',
     problemStatement: '',
@@ -82,129 +33,127 @@ function RegistrationForm() {
     techStack: '',
     expectedOutcome: '',
 
-    // Declarations
+    // Agreements
     agreeRules: false,
-
-    // Experience
-    previousExperience: ''
+    previousExperience: 'No',
   });
+
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [message, setMessage] = useState({ type: '', text: '' });
+  const [isRegistrationComplete, setIsRegistrationComplete] = useState(false);
+
+  const departments = [
+    'CSE',
+    'CSE (AI & ML)',
+    'CSE (DS)',
+    'CSE (CS)',
+    'ECE',
+    'EE',
+    'ME',
+    'CE',
+    'Other'
+  ];
+
+  const categories = [
+    'AI / Machine Learning',
+    'Web Development',
+    'Mobile App',
+    'IoT / Hardware',
+    'Blockchain',
+    'Game Development',
+    'Cybersecurity',
+    'Other'
+  ];
+
+  const roles = [
+    'Frontend Developer',
+    'Backend Developer',
+    'Full Stack Developer',
+    'UI/UX Designer',
+    'ML Engineer',
+    'Data Scientist',
+    'DevOps',
+    'Other'
+  ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormState(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
 
+    // Clear error when user types
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
-  const handleTeamSizeChange = (e) => {
-    const size = parseInt(e.target.value);
-    setTeamSize(size);
-    setFormData(prev => ({ ...prev, teamSize: size }));
-    
-    // Hide member 6 if team size is reduced to 5
-    if (size === 5) {
-      setShowMember6(false);
-    }
-  };
-
-  const handleLeaderChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      leader: { ...prev.leader, [name]: value }
-    }));
-
-    if (errors[`leader_${name}`]) {
-      setErrors(prev => ({ ...prev, [`leader_${name}`]: '' }));
-    }
-  };
-
-  const handleMemberChange = (index, e) => {
-    const { name, value } = e.target;
-    setFormData(prev => {
+  const handleMemberChange = (index, field, value) => {
+    setFormState(prev => {
       const newMembers = [...prev.members];
-      newMembers[index] = { ...newMembers[index], [name]: value };
+      newMembers[index] = { ...newMembers[index], [field]: value };
       return { ...prev, members: newMembers };
     });
+  };
 
-    if (errors[`member${index + 2}_${name}`]) {
-      setErrors(prev => ({ ...prev, [`member${index + 2}_${name}`]: '' }));
-    }
+  const handleTeamSizeChange = (e) => {
+    const size = parseInt(e.target.value);
+    setFormState(prev => ({ ...prev, teamSize: size }));
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    // Team Details
-    if (!formData.teamName.trim()) newErrors.teamName = 'Team name is required';
+    // Team Name
+    if (!formState.teamName.trim()) {
+      newErrors.teamName = 'Team name is required';
+    }
 
     // Leader validation
-    if (!formData.leader.fullName.trim()) newErrors.leader_fullName = 'Leader name is required';
-    if (!formData.leader.rollNumber.trim()) newErrors.leader_rollNumber = 'Roll number is required';
-    if (!formData.leader.department) newErrors.leader_department = 'Department is required';
-    if (!formData.leader.email.trim()) {
-      newErrors.leader_email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.leader.email)) {
-      newErrors.leader_email = 'Invalid email format';
+    if (!formState.leaderName.trim()) newErrors.leaderName = 'Leader name is required';
+    if (!formState.leaderRoll.trim()) newErrors.leaderRoll = 'Roll number is required';
+    if (!formState.leaderDept) newErrors.leaderDept = 'Department is required';
+    if (!formState.leaderEmail.trim()) {
+      newErrors.leaderEmail = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formState.leaderEmail)) {
+      newErrors.leaderEmail = 'Invalid email format';
     }
-    if (!formData.leader.phone.trim()) {
-      newErrors.leader_phone = 'Phone number is required';
-    } else if (!/^\d{10}$/.test(formData.leader.phone.replace(/\D/g, ''))) {
-      newErrors.leader_phone = 'Invalid phone number (10 digits required)';
+    if (!formState.leaderPhone.trim()) {
+      newErrors.leaderPhone = 'Phone is required';
+    } else if (!/^\d{10}$/.test(formState.leaderPhone)) {
+      newErrors.leaderPhone = 'Phone must be 10 digits';
     }
 
-    // Members validation (Members 2-5 are always required, Member 6 is optional)
-    const rollNumbers = [formData.leader.rollNumber];
-    
-    // Validate Members 2-5 (always required)
-    for (let i = 0; i < 4; i++) {
-      const member = formData.members[i];
+    // Validate members based on team size
+    for (let i = 0; i < formState.teamSize - 1; i++) {
+      const member = formState.members[i];
       const memberNum = i + 2;
 
-      if (!member.fullName.trim()) newErrors[`member${memberNum}_fullName`] = `Member ${memberNum} name is required`;
-      if (!member.rollNumber.trim()) {
-        newErrors[`member${memberNum}_rollNumber`] = `Roll number is required`;
-      } else if (rollNumbers.includes(member.rollNumber)) {
-        newErrors[`member${memberNum}_rollNumber`] = `Roll number must be unique`;
-      } else {
-        rollNumbers.push(member.rollNumber);
-      }
-      if (!member.department) newErrors[`member${memberNum}_department`] = `Department is required`;
+      if (!member.name.trim()) newErrors[`member${memberNum}Name`] = 'Name is required';
+      if (!member.roll.trim()) newErrors[`member${memberNum}Roll`] = 'Roll is required';
+      if (!member.dept) newErrors[`member${memberNum}Dept`] = 'Department is required';
       if (!member.email.trim()) {
-        newErrors[`member${memberNum}_email`] = `Email is required`;
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(member.email)) {
-        newErrors[`member${memberNum}_email`] = `Invalid email format`;
+        newErrors[`member${memberNum}Email`] = 'Email is required';
+      } else if (!/\S+@\S+\.\S+/.test(member.email)) {
+        newErrors[`member${memberNum}Email`] = 'Invalid email';
       }
       if (!member.phone.trim()) {
-        newErrors[`member${memberNum}_phone`] = `Phone number is required`;
-      }
-      if (!member.role) newErrors[`member${memberNum}_role`] = `Role is required`;
-    }
-
-    // Member 6 validation (only if shown and has data)
-    if (showMember6 && formData.members[4].fullName.trim()) {
-      const member6 = formData.members[4];
-      if (rollNumbers.includes(member6.rollNumber) && member6.rollNumber) {
-        newErrors.member6_rollNumber = 'Roll number must be unique';
+        newErrors[`member${memberNum}Phone`] = 'Phone is required';
+      } else if (!/^\d{10}$/.test(member.phone)) {
+        newErrors[`member${memberNum}Phone`] = 'Phone must be 10 digits';
       }
     }
 
-    // Project Idea validation
-    if (!formData.ideaTitle.trim()) newErrors.ideaTitle = 'Idea title is required';
-    if (!formData.category) newErrors.category = 'Category is required';
-    if (!formData.problemStatement.trim()) newErrors.problemStatement = 'Problem statement is required';
-    if (!formData.ideaDescription.trim()) newErrors.ideaDescription = 'Idea description is required';
+    // Project validation
+    if (!formState.ideaTitle.trim()) newErrors.ideaTitle = 'Project title is required';
+    if (!formState.category) newErrors.category = 'Category is required';
+    if (!formState.problemStatement.trim()) newErrors.problemStatement = 'Problem statement is required';
+    if (!formState.ideaDescription.trim()) newErrors.ideaDescription = 'Description is required';
 
-    // Declarations validation
-    if (!formData.agreeRules) newErrors.agreeRules = 'You must agree to the rules';
-
-    // Experience
-    if (!formData.previousExperience) newErrors.previousExperience = 'Please select an option';
+    // Agreement
+    if (!formState.agreeRules) newErrors.agreeRules = 'You must agree to the rules';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -212,215 +161,119 @@ function RegistrationForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
-      setSubmitStatus({ type: 'error', message: 'Please fix the errors above.' });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setMessage({ type: 'error', text: 'Please fix the errors above' });
       return;
     }
 
     setIsSubmitting(true);
-    setSubmitStatus(null);
+    setMessage({ type: '', text: '' });
+
+    // Build form data
+    const formData = {
+      teamName: formState.teamName,
+      teamSize: formState.teamSize,
+
+      // Leader
+      leaderName: formState.leaderName,
+      leaderRoll: formState.leaderRoll,
+      leaderDept: formState.leaderDept,
+      leaderEmail: formState.leaderEmail,
+      leaderPhone: formState.leaderPhone,
+      leaderSkills: formState.leaderSkills,
+
+      // Member 2
+      member2Name: formState.teamSize >= 2 ? formState.members[0].name : '',
+      member2Roll: formState.teamSize >= 2 ? formState.members[0].roll : '',
+      member2Dept: formState.teamSize >= 2 ? formState.members[0].dept : '',
+      member2Email: formState.teamSize >= 2 ? formState.members[0].email : '',
+      member2Phone: formState.teamSize >= 2 ? formState.members[0].phone : '',
+      member2Role: formState.teamSize >= 2 ? formState.members[0].role : '',
+      member2Skills: formState.teamSize >= 2 ? formState.members[0].skills : '',
+
+      // Member 3
+      member3Name: formState.teamSize >= 3 ? formState.members[1].name : '',
+      member3Roll: formState.teamSize >= 3 ? formState.members[1].roll : '',
+      member3Dept: formState.teamSize >= 3 ? formState.members[1].dept : '',
+      member3Email: formState.teamSize >= 3 ? formState.members[1].email : '',
+      member3Phone: formState.teamSize >= 3 ? formState.members[1].phone : '',
+      member3Role: formState.teamSize >= 3 ? formState.members[1].role : '',
+      member3Skills: formState.teamSize >= 3 ? formState.members[1].skills : '',
+
+      // Member 4
+      member4Name: formState.teamSize >= 4 ? formState.members[2].name : '',
+      member4Roll: formState.teamSize >= 4 ? formState.members[2].roll : '',
+      member4Dept: formState.teamSize >= 4 ? formState.members[2].dept : '',
+      member4Email: formState.teamSize >= 4 ? formState.members[2].email : '',
+      member4Phone: formState.teamSize >= 4 ? formState.members[2].phone : '',
+      member4Role: formState.teamSize >= 4 ? formState.members[2].role : '',
+      member4Skills: formState.teamSize >= 4 ? formState.members[2].skills : '',
+
+      // Member 5
+      member5Name: formState.teamSize >= 5 ? formState.members[3].name : '',
+      member5Roll: formState.teamSize >= 5 ? formState.members[3].roll : '',
+      member5Dept: formState.teamSize >= 5 ? formState.members[3].dept : '',
+      member5Email: formState.teamSize >= 5 ? formState.members[3].email : '',
+      member5Phone: formState.teamSize >= 5 ? formState.members[3].phone : '',
+      member5Role: formState.teamSize >= 5 ? formState.members[3].role : '',
+      member5Skills: formState.teamSize >= 5 ? formState.members[3].skills : '',
+
+      // Project
+      ideaTitle: formState.ideaTitle,
+      category: formState.category,
+      problemStatement: formState.problemStatement,
+      ideaDescription: formState.ideaDescription,
+      techStack: formState.techStack,
+      expectedOutcome: formState.expectedOutcome,
+
+      // Agreements
+      agreeRules: formState.agreeRules,
+      previousExperience: formState.previousExperience
+    };
 
     try {
-      // Flatten data for Google Sheets
-      const flatData = {
-        teamName: formData.teamName,
-        teamSize: showMember6 ? 6 : 5,
-        
-        // Leader
-        leaderName: formData.leader.fullName,
-        leaderRoll: formData.leader.rollNumber,
-        leaderDept: formData.leader.department,
-        leaderEmail: formData.leader.email,
-        leaderPhone: formData.leader.phone,
-        leaderSkills: formData.leader.skills,
-
-        // Members 2-6
-        ...formData.members.reduce((acc, member, i) => {
-          const num = i + 2;
-          acc[`member${num}Name`] = member.fullName;
-          acc[`member${num}Roll`] = member.rollNumber;
-          acc[`member${num}Dept`] = member.department;
-          acc[`member${num}Email`] = member.email;
-          acc[`member${num}Phone`] = member.phone;
-          acc[`member${num}Role`] = member.role;
-          acc[`member${num}Skills`] = member.skills;
-          return acc;
-        }, {}),
-
-        // Project
-        ideaTitle: formData.ideaTitle,
-        category: formData.category,
-        problemStatement: formData.problemStatement,
-        ideaDescription: formData.ideaDescription,
-        techStack: formData.techStack,
-        expectedOutcome: formData.expectedOutcome,
-
-        // Declarations
-        agreeRules: formData.agreeRules,
-
-        // Experience
-        previousExperience: formData.previousExperience
-      };
-
-      await fetch(GOOGLE_SCRIPT_URL, {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(flatData)
+        body: JSON.stringify(formData),
       });
 
-      setSubmitStatus({ type: 'success', message: '🎉 Registration successful! Good luck with the hackathon!' });
-      
-      // Reset form
-      setFormData({
-        teamName: '',
-        teamSize: 5,
-        leader: { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: 'Leader', skills: '' },
-        members: Array(5).fill().map(() => ({ fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' })),
-        ideaTitle: '',
-        category: '',
-        problemStatement: '',
-        ideaDescription: '',
-        techStack: '',
-        expectedOutcome: '',
-        agreeRules: false,
-        previousExperience: ''
-      });
-      setTeamSize(5);
-      setShowMember6(false);
-      
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const result = await response.json();
 
+      if (result.status === 'success') {
+        setIsRegistrationComplete(true);
+      } else {
+        setMessage({ type: 'error', text: 'Something went wrong. Please try again.' });
+      }
     } catch (error) {
-      setSubmitStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
-    } finally {
-      setIsSubmitting(false);
+      setMessage({ type: 'error', text: 'Network error. Please try again.' });
     }
+
+    setIsSubmitting(false);
   };
 
-  const renderMemberFields = (index, isRequired = true) => {
-    const memberNum = index + 2;
-    const member = formData.members[index];
-
+  // Show success screen after registration
+  if (isRegistrationComplete) {
     return (
-      <div className="member-card" key={index}>
-        <h4>
-          👤 Member {memberNum} {!isRequired && '(Optional)'}
-          {!isRequired && (
-            <button 
-              type="button" 
-              className="remove-member-btn"
-              onClick={() => {
-                setShowMember6(false);
-                // Clear member 6 data
-                setFormData(prev => {
-                  const newMembers = [...prev.members];
-                  newMembers[4] = { fullName: '', rollNumber: '', department: '', email: '', phone: '', role: '', skills: '' };
-                  return { ...prev, members: newMembers };
-                });
-              }}
-            >
-              ✕ Remove
-            </button>
-          )}
-        </h4>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Full Name {isRequired && '*'}</label>
-            <input
-              type="text"
-              name="fullName"
-              value={member.fullName}
-              onChange={(e) => handleMemberChange(index, e)}
-              placeholder="Full name"
-            />
-            {errors[`member${memberNum}_fullName`] && <span className="error">{errors[`member${memberNum}_fullName`]}</span>}
+      <div className="registration-page">
+        <div className="container">
+          <div className="success-screen">
+            <div className="success-icon">✓</div>
+            <h1>Registration Complete!</h1>
+            <p className="success-message">
+              Thank you for registering for HackSnippet 4.0
+            </p>
+            <p className="wait-message">
+              Please wait for further information. We'll contact you via email.
+            </p>
+            <Link to="/" className="home-btn">
+              Back to Home
+            </Link>
           </div>
-          <div className="form-group">
-            <label>Roll Number {isRequired && '*'}</label>
-            <input
-              type="text"
-              name="rollNumber"
-              value={member.rollNumber}
-              onChange={(e) => handleMemberChange(index, e)}
-              placeholder="Roll / Registration number"
-            />
-            {errors[`member${memberNum}_rollNumber`] && <span className="error">{errors[`member${memberNum}_rollNumber`]}</span>}
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Department {isRequired && '*'}</label>
-            <select
-              name="department"
-              value={member.department}
-              onChange={(e) => handleMemberChange(index, e)}
-            >
-              <option value="">Select department</option>
-              {DEPARTMENTS.map(dept => (
-                <option key={dept} value={dept}>{dept}</option>
-              ))}
-            </select>
-            {errors[`member${memberNum}_department`] && <span className="error">{errors[`member${memberNum}_department`]}</span>}
-          </div>
-          <div className="form-group">
-            <label>College Email {isRequired && '*'}</label>
-            <input
-              type="email"
-              name="email"
-              value={member.email}
-              onChange={(e) => handleMemberChange(index, e)}
-              placeholder="college@email.com"
-            />
-            {errors[`member${memberNum}_email`] && <span className="error">{errors[`member${memberNum}_email`]}</span>}
-          </div>
-        </div>
-
-        <div className="form-row">
-          <div className="form-group">
-            <label>Phone Number {isRequired && '*'}</label>
-            <input
-              type="tel"
-              name="phone"
-              value={member.phone}
-              onChange={(e) => handleMemberChange(index, e)}
-              placeholder="10-digit phone number"
-            />
-            {errors[`member${memberNum}_phone`] && <span className="error">{errors[`member${memberNum}_phone`]}</span>}
-          </div>
-          <div className="form-group">
-            <label>Role in Team {isRequired && '*'}</label>
-            <select
-              name="role"
-              value={member.role}
-              onChange={(e) => handleMemberChange(index, e)}
-            >
-              <option value="">Select role</option>
-              {ROLES.map(role => (
-                <option key={role} value={role}>{role}</option>
-              ))}
-            </select>
-            {errors[`member${memberNum}_role`] && <span className="error">{errors[`member${memberNum}_role`]}</span>}
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>Skills / Technologies (Optional)</label>
-          <input
-            type="text"
-            name="skills"
-            value={member.skills}
-            onChange={(e) => handleMemberChange(index, e)}
-            placeholder="e.g., React, Python, TensorFlow"
-          />
         </div>
       </div>
     );
-  };
+  }
 
   return (
     <div className="registration-page">
@@ -428,14 +281,14 @@ function RegistrationForm() {
         <Link to="/" className="back-link">← Back to Home</Link>
 
         <header>
-          <h1> Team Registration</h1>
-          <p>Register your team for HackSnippet 2026</p>
+          <h1>Team Registration</h1>
+          <p>Register your team for HackSnippet 4.0</p>
         </header>
 
-        <form onSubmit={handleSubmit} className="form">
+        <form className="form" onSubmit={handleSubmit}>
 
-          {/* Team Details */}
-          <h2>👥 Team Details</h2>
+          {/* Team Info */}
+          <h2>Team Information</h2>
 
           <div className="form-row">
             <div className="form-group">
@@ -443,79 +296,76 @@ function RegistrationForm() {
               <input
                 type="text"
                 name="teamName"
-                value={formData.teamName}
+                value={formState.teamName}
                 onChange={handleChange}
-                placeholder="Your awesome team name"
+                placeholder="Enter your team name"
               />
               {errors.teamName && <span className="error">{errors.teamName}</span>}
             </div>
+
             <div className="form-group">
               <label>Team Size *</label>
-              <select
-                name="teamSize"
-                value={teamSize}
-                onChange={handleTeamSizeChange}
-              >
+              <select name="teamSize" value={formState.teamSize} onChange={handleTeamSizeChange}>
+                <option value={1}>1 (Solo)</option>
+                <option value={2}>2 Members</option>
+                <option value={3}>3 Members</option>
+                <option value={4}>4 Members</option>
                 <option value={5}>5 Members</option>
-                <option value={6}>6 Members</option>
               </select>
-              <span className="field-note">Minimum 5 members required</span>
             </div>
           </div>
 
           {/* Team Leader */}
-          <h2>👤 Team Leader (Member 1)</h2>
+          <h2>Team Leader</h2>
 
           <div className="form-row">
             <div className="form-group">
               <label>Full Name *</label>
               <input
                 type="text"
-                name="fullName"
-                value={formData.leader.fullName}
-                onChange={handleLeaderChange}
-                placeholder="Full name"
+                name="leaderName"
+                value={formState.leaderName}
+                onChange={handleChange}
+                placeholder="Enter full name"
               />
-              {errors.leader_fullName && <span className="error">{errors.leader_fullName}</span>}
+              {errors.leaderName && <span className="error">{errors.leaderName}</span>}
             </div>
+
             <div className="form-group">
               <label>Roll Number *</label>
               <input
                 type="text"
-                name="rollNumber"
-                value={formData.leader.rollNumber}
-                onChange={handleLeaderChange}
-                placeholder="Roll / Registration number"
+                name="leaderRoll"
+                value={formState.leaderRoll}
+                onChange={handleChange}
+                placeholder="Enter roll number"
               />
-              {errors.leader_rollNumber && <span className="error">{errors.leader_rollNumber}</span>}
+              {errors.leaderRoll && <span className="error">{errors.leaderRoll}</span>}
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group">
               <label>Department *</label>
-              <select
-                name="department"
-                value={formData.leader.department}
-                onChange={handleLeaderChange}
-              >
-                <option value="">Select department</option>
-                {DEPARTMENTS.map(dept => (
+              <select name="leaderDept" value={formState.leaderDept} onChange={handleChange}>
+                <option value="">Select Department</option>
+                {departments.map(dept => (
                   <option key={dept} value={dept}>{dept}</option>
                 ))}
               </select>
-              {errors.leader_department && <span className="error">{errors.leader_department}</span>}
+              {errors.leaderDept && <span className="error">{errors.leaderDept}</span>}
             </div>
+
             <div className="form-group">
-              <label>College Email *</label>
+              <label>Email *</label>
               <input
                 type="email"
-                name="email"
-                value={formData.leader.email}
-                onChange={handleLeaderChange}
-                placeholder="college@email.com"
+                name="leaderEmail"
+                value={formState.leaderEmail}
+                onChange={handleChange}
+                placeholder="Enter email"
               />
-              {errors.leader_email && <span className="error">{errors.leader_email}</span>}
+              {errors.leaderEmail && <span className="error">{errors.leaderEmail}</span>}
             </div>
           </div>
 
@@ -524,79 +374,147 @@ function RegistrationForm() {
               <label>Phone Number *</label>
               <input
                 type="tel"
-                name="phone"
-                value={formData.leader.phone}
-                onChange={handleLeaderChange}
+                name="leaderPhone"
+                value={formState.leaderPhone}
+                onChange={handleChange}
                 placeholder="10-digit phone number"
               />
-              {errors.leader_phone && <span className="error">{errors.leader_phone}</span>}
+              {errors.leaderPhone && <span className="error">{errors.leaderPhone}</span>}
             </div>
+
             <div className="form-group">
-              <label>Role in Team</label>
+              <label>Skills</label>
               <input
                 type="text"
-                value="Team Leader"
-                disabled
-                className="disabled-input"
+                name="leaderSkills"
+                value={formState.leaderSkills}
+                onChange={handleChange}
+                placeholder="e.g., React, Python, ML"
               />
             </div>
-          </div>
-
-          <div className="form-group">
-            <label>Skills / Technologies (Optional)</label>
-            <input
-              type="text"
-              name="skills"
-              value={formData.leader.skills}
-              onChange={handleLeaderChange}
-              placeholder="e.g., React, Python, TensorFlow"
-            />
           </div>
 
           {/* Team Members */}
-          <h2>👥 Team Members</h2>
-          <p className="section-note">Members 2-5 are required. Member 6 is optional.</p>
+          {formState.teamSize > 1 && (
+            <>
+              <h2>Team Members</h2>
 
-          {/* Render Members 2-5 (Required) */}
-          {[0, 1, 2, 3].map((index) => renderMemberFields(index, true))}
+              {Array.from({ length: formState.teamSize - 1 }, (_, index) => (
+                <div className="member-card" key={index}>
+                  <h4>Member {index + 2}</h4>
 
-          {/* Optional Member 6 */}
-          {!showMember6 && (
-            <button
-              type="button"
-              className="add-member-btn"
-              onClick={() => setShowMember6(true)}
-            >
-              + Add Optional Member 6
-            </button>
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Full Name *</label>
+                      <input
+                        type="text"
+                        value={formState.members[index].name}
+                        onChange={(e) => handleMemberChange(index, 'name', e.target.value)}
+                        placeholder="Enter full name"
+                      />
+                      {errors[`member${index + 2}Name`] && <span className="error">{errors[`member${index + 2}Name`]}</span>}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Roll Number *</label>
+                      <input
+                        type="text"
+                        value={formState.members[index].roll}
+                        onChange={(e) => handleMemberChange(index, 'roll', e.target.value)}
+                        placeholder="Enter roll number"
+                      />
+                      {errors[`member${index + 2}Roll`] && <span className="error">{errors[`member${index + 2}Roll`]}</span>}
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Department *</label>
+                      <select
+                        value={formState.members[index].dept}
+                        onChange={(e) => handleMemberChange(index, 'dept', e.target.value)}
+                      >
+                        <option value="">Select Department</option>
+                        {departments.map(dept => (
+                          <option key={dept} value={dept}>{dept}</option>
+                        ))}
+                      </select>
+                      {errors[`member${index + 2}Dept`] && <span className="error">{errors[`member${index + 2}Dept`]}</span>}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Email *</label>
+                      <input
+                        type="email"
+                        value={formState.members[index].email}
+                        onChange={(e) => handleMemberChange(index, 'email', e.target.value)}
+                        placeholder="Enter email"
+                      />
+                      {errors[`member${index + 2}Email`] && <span className="error">{errors[`member${index + 2}Email`]}</span>}
+                    </div>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Phone Number *</label>
+                      <input
+                        type="tel"
+                        value={formState.members[index].phone}
+                        onChange={(e) => handleMemberChange(index, 'phone', e.target.value)}
+                        placeholder="10-digit phone number"
+                      />
+                      {errors[`member${index + 2}Phone`] && <span className="error">{errors[`member${index + 2}Phone`]}</span>}
+                    </div>
+
+                    <div className="form-group">
+                      <label>Role</label>
+                      <select
+                        value={formState.members[index].role}
+                        onChange={(e) => handleMemberChange(index, 'role', e.target.value)}
+                      >
+                        <option value="">Select Role</option>
+                        {roles.map(role => (
+                          <option key={role} value={role}>{role}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label>Skills</label>
+                    <input
+                      type="text"
+                      value={formState.members[index].skills}
+                      onChange={(e) => handleMemberChange(index, 'skills', e.target.value)}
+                      placeholder="e.g., React, Python, ML"
+                    />
+                  </div>
+                </div>
+              ))}
+            </>
           )}
 
-          {showMember6 && renderMemberFields(4, false)}
-
           {/* Project Idea */}
-          <h2>💡 Project Idea</h2>
+          <h2>Project Idea</h2>
 
           <div className="form-row">
             <div className="form-group">
-              <label>Idea Title *</label>
+              <label>Project Title *</label>
               <input
                 type="text"
                 name="ideaTitle"
-                value={formData.ideaTitle}
+                value={formState.ideaTitle}
                 onChange={handleChange}
-                placeholder="Your project title"
+                placeholder="Enter project title"
               />
               {errors.ideaTitle && <span className="error">{errors.ideaTitle}</span>}
             </div>
+
             <div className="form-group">
               <label>Category *</label>
-              <select
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-              >
-                <option value="">Select category</option>
-                {CATEGORIES.map(cat => (
+              <select name="category" value={formState.category} onChange={handleChange}>
+                <option value="">Select Category</option>
+                {categories.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
@@ -608,121 +526,104 @@ function RegistrationForm() {
             <label>Problem Statement *</label>
             <textarea
               name="problemStatement"
-              value={formData.problemStatement}
+              value={formState.problemStatement}
               onChange={handleChange}
-              rows="3"
               placeholder="What problem are you solving?"
+              rows={3}
             />
             {errors.problemStatement && <span className="error">{errors.problemStatement}</span>}
           </div>
 
           <div className="form-group">
-            <label>Idea Description *</label>
+            <label>Project Description *</label>
             <textarea
               name="ideaDescription"
-              value={formData.ideaDescription}
+              value={formState.ideaDescription}
               onChange={handleChange}
-              rows="5"
-              placeholder="Describe your solution in detail..."
+              placeholder="Describe your solution"
+              rows={4}
             />
             {errors.ideaDescription && <span className="error">{errors.ideaDescription}</span>}
           </div>
 
           <div className="form-row">
             <div className="form-group">
-              <label>Proposed Tech Stack (Optional)</label>
+              <label>Tech Stack</label>
               <input
                 type="text"
                 name="techStack"
-                value={formData.techStack}
+                value={formState.techStack}
                 onChange={handleChange}
                 placeholder="e.g., React, Node.js, MongoDB"
               />
             </div>
+
             <div className="form-group">
-              <label>Expected Outcome (Optional)</label>
+              <label>Expected Outcome</label>
               <input
                 type="text"
                 name="expectedOutcome"
-                value={formData.expectedOutcome}
+                value={formState.expectedOutcome}
                 onChange={handleChange}
-                placeholder="Expected impact of your project"
+                placeholder="What will you deliver?"
               />
             </div>
           </div>
 
-          {/* Declarations */}
-          <h2>📄 Declarations & Consent</h2>
+          {/* Agreements */}
+          <h2>Agreements</h2>
 
           <div className="checkbox-group">
             <label className="checkbox-label">
               <input
                 type="checkbox"
                 name="agreeRules"
-                checked={formData.agreeRules}
+                checked={formState.agreeRules}
                 onChange={handleChange}
               />
-              <span>
-                I agree to the <Link to="/rules" className="rules-link" target="_blank">Hackathon Rules & Code of Conduct</Link> *
-              </span>
+              <span>I agree to the <Link to="/rules" className="rules-link">hackathon rules</Link> and guidelines *</span>
             </label>
             {errors.agreeRules && <span className="error">{errors.agreeRules}</span>}
           </div>
 
-
-          {/* Experience */}
-          <h2>🏆 Previous Experience</h2>
-
           <div className="form-group">
-            <label>Have you participated in hackathons before? *</label>
+            <label>Previous Hackathon Experience</label>
             <div className="radio-group">
-              <div className="radio-option">
+              <label className="radio-option">
                 <input
                   type="radio"
-                  id="experienceYes"
                   name="previousExperience"
                   value="Yes"
-                  checked={formData.previousExperience === 'Yes'}
+                  checked={formState.previousExperience === 'Yes'}
                   onChange={handleChange}
                 />
-                <label htmlFor="experienceYes">Yes</label>
-              </div>
-              <div className="radio-option">
+                <span>Yes</span>
+              </label>
+              <label className="radio-option">
                 <input
                   type="radio"
-                  id="experienceNo"
                   name="previousExperience"
                   value="No"
-                  checked={formData.previousExperience === 'No'}
+                  checked={formState.previousExperience === 'No'}
                   onChange={handleChange}
                 />
-                <label htmlFor="experienceNo">No</label>
-              </div>
+                <span>No</span>
+              </label>
             </div>
-            {errors.previousExperience && <span className="error">{errors.previousExperience}</span>}
           </div>
 
-          {/* Status Message */}
-          {submitStatus && (
-            <div className={`message ${submitStatus.type}`}>
-              {submitStatus.message}
+          {/* Submit */}
+          <div className="submit-btn-container">
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              {isSubmitting ? 'Submitting...' : 'Register Team'}
+            </button>
+          </div>
+
+          {message.text && (
+            <div className={`message ${message.type}`}>
+              {message.text}
             </div>
           )}
-
-          {/* Submit Button */}
-          <div className="submit-btn-container">
-            <StarBorder
-              as="button"
-              type="submit"
-              disabled={isSubmitting}
-              color="#e94560"
-              speed="4s"
-              thickness={2}
-            >
-              {isSubmitting ? 'Submitting...' : '🚀 Register Team'}
-            </StarBorder>
-          </div>
-
         </form>
       </div>
     </div>
