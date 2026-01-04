@@ -85,3 +85,61 @@ body {
   z-index: 1;
   min-height: 100vh;
 }
+
+/* Mobile: Reduce overlay on smaller screens for better visibility */
+@media (max-width: 768px) {
+  .background-overlay {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Audio unlock hint for mobile */
+.audio-unlock-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(97, 220, 163, 0.2);
+  border: 1px solid rgba(97, 220, 163, 0.5);
+  color: #61dca3;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-family: sans-serif;
+  z-index: 100;
+  animation: fadeInOut 2s ease-in-out infinite, hideAfter 5s forwards;
+  pointer-events: none;
+}
+
+@keyframes fadeInOut {
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hideAfter {
+
+  0%,
+  90% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Hide on desktop */
+@media (min-width: 769px) {
+  .audio-unlock-hint {
+    display: none;
+  }
+}

@@ -9,39 +9,66 @@ import './App.css';
 function AppContent() {
   const [isPaused, setIsPaused] = useState(false);
   const [isGlitching, setIsGlitching] = useState(false);
+  const [audioUnlocked, setAudioUnlocked] = useState(false);
   const glitchSoundRef = useRef(null);
   const location = useLocation();
 
-  // Check if on registration or rules page
-  const isFormOrRulesPage = location.pathname === '/register' || location.pathname === '/rules';
+  const isRegistrationPage = location.pathname === '/register';
 
   // Preload glitch sound
   useEffect(() => {
     glitchSoundRef.current = new Audio('/sounds/glitch.wav');
     glitchSoundRef.current.volume = 0.3;
+
+    // Preload audio
+    glitchSoundRef.current.load();
   }, []);
 
-  // Glitch every 10 seconds - but NOT on registration or rules page
+  // Unlock audio on first user interaction (for mobile)
   useEffect(() => {
-    // Don't run glitch on form or rules pages
-    if (isFormOrRulesPage) {
+    const unlockAudio = () => {
+      if (glitchSoundRef.current && !audioUnlocked) {
+        // Play and immediately pause to unlock audio
+        glitchSoundRef.current.play().then(() => {
+          glitchSoundRef.current.pause();
+          glitchSoundRef.current.currentTime = 0;
+          setAudioUnlocked(true);
+        }).catch(() => {
+          // Silent fail - will try again on next interaction
+        });
+      }
+    };
+
+    // Listen for any user interaction
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('scroll', unlockAudio, { once: true });
+
+    return () => {
+      document.removeEventListener('touchstart', unlockAudio);
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('scroll', unlockAudio);
+    };
+  }, [audioUnlocked]);
+
+  // Glitch effect
+  useEffect(() => {
+    if (isRegistrationPage) {
       setIsPaused(false);
       setIsGlitching(false);
       return;
     }
 
     const interval = setInterval(() => {
-      // Start glitch
       setIsPaused(true);
       setIsGlitching(true);
 
-      // Play sound
+      // Play sound (will only work if audio is unlocked)
       if (glitchSoundRef.current) {
         glitchSoundRef.current.currentTime = 0;
         glitchSoundRef.current.play().catch(() => { });
       }
 
-      // End glitch after 1.5 seconds
       setTimeout(() => {
         setIsPaused(false);
         setIsGlitching(false);
@@ -50,10 +77,17 @@ function AppContent() {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [isFormOrRulesPage]);
+  }, [isRegistrationPage]);
 
   return (
     <div className="app">
+      {/* Tap to enable sound overlay - only on mobile */}
+      {!audioUnlocked && (
+        <div className="audio-unlock-hint">
+          Tap anywhere to enable sound
+        </div>
+      )}
+
       {/* FaultyTerminal Background */}
       <div className="background">
         <FaultyTerminal
