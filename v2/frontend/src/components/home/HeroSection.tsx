@@ -50,7 +50,7 @@ export const HeroSection = () => {
 
           {/* Countdown */}
           <div className="mb-10">
-            <CountdownTimer targetDate="2026-03-14T08:30:00" />
+            <CountdownTimer targetDate="2026-02-20T23:59:00" />
           </div>
 
           {/* CTA Buttons */}
