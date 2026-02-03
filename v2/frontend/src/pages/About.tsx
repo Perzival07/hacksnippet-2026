@@ -11,9 +11,7 @@ const About = () => {
             <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
               <span className="text-primary neon-text">About</span> HackSnippet 4.0
             </h1>
-            <p className="font-mono text-muted-foreground max-w-2xl mx-auto">
-              The biggest hackathon of the year is back, bigger and better than ever.
-            </p>
+
           </div>
 
           {/* What is HackSnippet */}
