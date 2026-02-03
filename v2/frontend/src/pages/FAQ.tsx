@@ -12,19 +12,19 @@ const faqData = [
     questions: [
       {
         q: "What is HackSnippet 4.0?",
-        a: "HackSnippet 4.0 is a 48-hour hackathon where developers, designers, and innovators come together to build amazing projects. It's our fourth edition and the biggest one yet!",
+        a: "HackSnippet 4.0 is a two-stage hackathon where developers, designers, and innovators come together to build amazing projects. It's our fourth edition and the biggest one yet!",
       },
       {
         q: "When and where is the event?",
-        a: "The event takes place from March 15-17, 2024 at the Tech Innovation Hub. We also offer virtual participation for those who can't attend in person.",
+        a: "Stage 1 (Online Idea Submission) runs from 4th Feb - 20th Feb, 2026. Stage 2 (Offline Exhibition) takes place on 28th Feb, 2026 at IIT Research Park for 8 hours.",
       },
       {
         q: "Is there a registration fee?",
-        a: "No! HackSnippet 4.0 is completely free to attend. We provide food, swag, and an amazing experience at no cost to participants.",
+        a: "No! HackSnippet 4.0 is completely free to participate. There's no registration fee at all.",
       },
       {
-        q: "Can I participate remotely?",
-        a: "Yes! We offer a hybrid format. You can participate virtually and still compete for prizes, attend workshops, and connect with other hackers.",
+        q: "How does the two-stage format work?",
+        a: "First, submit your innovative idea online during Stage 1. Our panel will review submissions and select the best ideas. Selected teams then showcase their projects at the offline exhibition on 28th Feb.",
       },
     ],
   },
@@ -33,19 +33,23 @@ const faqData = [
     questions: [
       {
         q: "Who can participate?",
-        a: "Anyone! Students, professionals, hobbyists – all skill levels are welcome. You must be 18+ for in-person participation, or join virtually with guardian consent if under 18.",
+        a: "All students of UEM and IEM from 1st year to 4th year are eligible to participate. All skill levels are welcome!",
       },
       {
         q: "Do I need a team to participate?",
-        a: "You can register individually and find a team at the event, or register with your pre-formed team. Teams can have 2-4 members.",
+        a: "You can participate solo or form a team. Teams can have 1-5 members - it's completely flexible!",
       },
       {
         q: "What if I don't have a team?",
-        a: "No worries! We have a team formation session at the start of the event. Many great teams are formed at hackathons!",
+        a: "No worries! You can participate solo, or find teammates through our community channels before the event.",
       },
       {
         q: "Do I need prior hackathon experience?",
-        a: "Not at all! Many first-time hackers participate and even win. We have workshops and mentors to help you throughout the event.",
+        a: "Not at all! Many first-time hackers participate and even win. Beginners are encouraged to join!",
+      },
+      {
+        q: "What should I bring to the offline event?",
+        a: "Bring your laptop, charger, student ID for verification, and any other devices you need for your project.",
       },
     ],
   },
@@ -53,20 +57,20 @@ const faqData = [
     category: "Technical",
     questions: [
       {
-        q: "What should I bring?",
-        a: "Bring your laptop, charger, and any other devices you need. We recommend bringing a sleeping bag if you plan to stay overnight. We provide food, drinks, and WiFi.",
+        q: "What are the tracks/categories?",
+        a: "We have 4 tracks: AI/ML, AppDev/WebDev, Hardware, and a secret UI/UX track. Choose the one that best fits your project!",
       },
       {
         q: "Are there any restrictions on what I can build?",
-        a: "Projects must be started from scratch during the hackathon. You can use open-source libraries and APIs, but your core project must be new.",
+        a: "Your project should align with one of our tracks. You can use open-source libraries and APIs. Be creative and innovative!",
       },
       {
         q: "What technologies can I use?",
-        a: "You can use any programming language, framework, or technology stack you prefer. We have category tracks like AI/ML, Web3, Health Tech, and more.",
+        a: "You can use any programming language, framework, or technology stack you prefer. There are no restrictions on the tools you use.",
       },
       {
-        q: "Will there be WiFi and power outlets?",
-        a: "Yes! We have high-speed WiFi throughout the venue and plenty of power outlets. We also have backup power in case of outages.",
+        q: "What should my idea submission include?",
+        a: "Your submission should clearly explain your idea, the problem it solves, your proposed solution, and which track it falls under.",
       },
     ],
   },
@@ -75,15 +79,19 @@ const faqData = [
     questions: [
       {
         q: "How are projects judged?",
-        a: "Projects are judged on innovation, technical complexity, design, and impact. Each team presents their project to a panel of judges from industry-leading companies.",
+        a: "Projects are judged on innovation, technical complexity, design, and impact. Each team presents their project to our panel of judges at the offline exhibition.",
       },
       {
         q: "What are the prizes?",
-        a: "We have over $10,000 in prizes! 1st place wins $5,000 + MacBook Pro, 2nd place wins $3,000 + iPad Pro, and 3rd place wins $1,500 + AirPods Pro. Plus category-specific prizes!",
+        a: "We have an Overall Winner prize (Trophy, Premium Swag Kit, Certificate of Excellence) plus Track Winner prizes for AI/ML, AppDev/WebDev, Hardware, and a secret UI/UX track!",
       },
       {
-        q: "When is the submission deadline?",
-        a: "All projects must be submitted by 9:00 AM on Sunday (Day 3). Late submissions will not be accepted.",
+        q: "Do all participants get certificates?",
+        a: "Yes! All participants receive certificates of participation, stickers, and goodies.",
+      },
+      {
+        q: "When will results be announced?",
+        a: "Prize distribution happens on the same day as the offline exhibition (28th Feb, 2026) after the judging is complete.",
       },
     ],
   },

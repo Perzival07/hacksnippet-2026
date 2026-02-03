@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { Calendar, MapPin, Users, Clock, Target, Zap, FileText, Presentation } from "lucide-react";
+import { Calendar, MapPin, Users, Clock, Target, Zap, FileText, Presentation, AlertTriangle } from "lucide-react";
 
 const About = () => {
   return (
@@ -127,7 +127,7 @@ const About = () => {
           </div>
 
           {/* Eligibility */}
-          <div className="glass-effect rounded-lg p-8">
+          <div className="glass-effect rounded-lg p-8 mb-12">
             <h2 className="font-display text-2xl text-primary neon-text mb-4">
               Eligibility
             </h2>
@@ -157,6 +157,48 @@ const About = () => {
                 <span>100% Free - No registration fee</span>
               </li>
             </ul>
+          </div>
+
+          {/* Rules and Regulations */}
+          <div className="glass-effect rounded-lg p-8 border border-yellow-500/30">
+            <div className="flex items-center gap-3 mb-6">
+              <AlertTriangle className="h-8 w-8 text-yellow-500" />
+              <h2 className="font-display text-2xl text-yellow-500">
+                Rules & Regulations
+              </h2>
+            </div>
+            <ol className="font-mono text-muted-foreground space-y-4 list-decimal list-inside">
+              <li className="pl-2">
+                Participation is open to registered candidates only.
+              </li>
+              <li className="pl-2">
+                Teams must be formed according to the guidelines provided during registration. Team members cannot be changed after registration.
+              </li>
+              <li className="pl-2">
+                All solutions must be original and developed during the hackathon phase. Plagiarism or use of pre-built projects is strictly prohibited.
+              </li>
+              <li className="pl-2">
+                Usage of open-source libraries and publicly available APIs is permitted with proper acknowledgment.
+              </li>
+              <li className="pl-2">
+                All projects must be completed and submitted within the stipulated time. Late submissions will not be accepted.
+              </li>
+              <li className="pl-2">
+                Participants are expected to maintain discipline and professional conduct throughout the event.
+              </li>
+              <li className="pl-2">
+                Any form of misconduct, unethical behavior, or violation of rules will result in disqualification.
+              </li>
+              <li className="pl-2">
+                Projects will be evaluated based on innovation, technical implementation, problem relevance, and presentation.
+              </li>
+              <li className="pl-2">
+                The decision of the judges and organizers shall be final and binding.
+              </li>
+              <li className="pl-2">
+                Participants must bring their own devices (laptops, chargers, and necessary accessories). Sharing of devices or resources between teams is strictly prohibited.
+              </li>
+            </ol>
           </div>
         </div>
       </section>
