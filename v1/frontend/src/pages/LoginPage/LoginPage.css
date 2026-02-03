@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap');
+
+.login-page {
+  padding: 40px 20px;
+  min-height: 100vh;
+  color: white;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(97, 220, 163, 0.3), rgba(97, 220, 163, 0.1));
+  border: 2px solid #61dca3;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(97, 220, 163, 0.3);
+}
+
+.back-link:hover {
+  background: linear-gradient(135deg, rgba(97, 220, 163, 0.4), rgba(97, 220, 163, 0.2));
+  border-color: #7ed957;
+  color: white;
+  transform: translateX(-8px);
+  box-shadow: 0 0 25px rgba(97, 220, 163, 0.5);
+}
+
+header {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 20px rgba(97, 220, 163, 0.5);
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-family: sans-serif;
+  color: white;
+}
+
+/* Dark Translucent Form */
+.login-form {
+  background: rgba(10, 20, 15, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(97, 220, 163, 0.2);
+  color: white;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  font-family: sans-serif;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(97, 220, 163, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-family: sans-serif;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #61dca3;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 15px rgba(97, 220, 163, 0.3);
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.error {
+  display: block;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  font-family: sans-serif;
+}
+
+.submit-btn-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #61dca3, #4ecf8e);
+  border: none;
+  border-radius: 50px;
+  color: #0a140f;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(97, 220, 163, 0.4);
+  text-transform: uppercase;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7ed957, #61dca3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(97, 220, 163, 0.6);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 20px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 0.95rem;
+}
+
+.message.error {
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+  color: #ff6b6b;
+}
+
+.message.success {
+  background: rgba(97, 220, 163, 0.2);
+  border: 1px solid rgba(97, 220, 163, 0.5);
+  color: #61dca3;
+}
+
+.login-footer {
+  margin-top: 25px;
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(97, 220, 163, 0.2);
+}
+
+.login-footer p {
+  color: rgba(255, 255, 255, 0.7);
+  font-family: sans-serif;
+  font-size: 0.95rem;
+}
+
+.register-link {
+  color: #61dca3;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #7ed957;
+  text-decoration: underline;
+}
