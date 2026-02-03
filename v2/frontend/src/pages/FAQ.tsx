@@ -139,10 +139,10 @@ const FAQ = () => {
               Still have questions?
             </p>
             <a
-              href="mailto:contact@hacksnippet.dev"
+              href="mailto:hacksnippet@gmail.com"
               className="font-mono text-primary hover:underline"
             >
-              contact@hacksnippet.dev
+              hacksnippet@gmail.com
             </a>
           </div>
         </div>

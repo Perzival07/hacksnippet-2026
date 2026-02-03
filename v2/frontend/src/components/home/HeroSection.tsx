@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CountdownTimer } from "./CountdownTimer";
-import { Terminal, Zap, Users } from "lucide-react";
+import { Terminal, Zap, Users, Gift } from "lucide-react";
 import logo from "@/assets/logo.svg";
 
 export const HeroSection = () => {
@@ -45,7 +45,7 @@ export const HeroSection = () => {
           <p className="font-mono text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             &gt; Initializing the ultimate hackathon experience...
             <br />
-            &gt; 8 hours | 1st Year Students | One epic event
+            &gt; 8 hours | All Students | 100% Free
           </p>
 
           {/* Countdown */}
@@ -80,10 +80,11 @@ export const HeroSection = () => {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
               { icon: Terminal, label: "8 Hours", desc: "Intense hacking" },
-              { icon: Users, label: "1st Year", desc: "Freshers only" },
+              { icon: Users, label: "All Years", desc: "1st to 4th year" },
+              { icon: Gift, label: "100% Free", desc: "No registration fee" },
               { icon: Zap, label: "Prizes", desc: "For all tracks" },
             ].map((stat, index) => (
               <div

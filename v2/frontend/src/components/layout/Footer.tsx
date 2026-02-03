@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Github, Twitter, Linkedin, Instagram, Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import logo from "@/assets/logo.svg";
 
 export const Footer = () => {
@@ -17,7 +17,7 @@ export const Footer = () => {
             </Link>
             <p className="text-muted-foreground text-sm font-mono max-w-md">
               Join the ultimate coding experience. Build, innovate, and compete
-              with the brightest minds in tech. 48 hours of non-stop hacking awaits!
+              with the brightest minds in tech. 8 hours of non-stop hacking awaits!
             </p>
           </div>
 
@@ -41,49 +41,29 @@ export const Footer = () => {
           {/* Contact */}
           <div>
             <h4 className="font-display text-primary mb-4">Connect</h4>
-            <div className="flex gap-4 mb-4">
+            <div className="space-y-3">
               <a
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="GitHub"
+                href="mailto:hacksnippet@gmail.com"
+                className="flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
               >
-                <Github size={20} />
+                <Mail size={16} />
+                hacksnippet@gmail.com
               </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
-              <a
-                href="#"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
+              <div className="flex items-center gap-2 text-sm font-mono text-muted-foreground">
+                <Phone size={16} />
+                <span>Koustav Das: +91 91239 24645</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm font-mono text-muted-foreground">
+                <Phone size={16} />
+                <span>Parag Chowdhury: +91 62896 52052</span>
+              </div>
             </div>
-            <a
-              href="mailto:contact@hacksnippet.dev"
-              className="flex items-center gap-2 text-sm font-mono text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Mail size={16} />
-              contact@hacksnippet.dev
-            </a>
           </div>
         </div>
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-sm font-mono text-muted-foreground">
-            © 2024 HackSnippet 4.0. All rights reserved. Built with 💚 by the
+            © 2026 HackSnippet 4.0. All rights reserved. Built with 💚 by the
             HackSnippet Team.
           </p>
         </div>

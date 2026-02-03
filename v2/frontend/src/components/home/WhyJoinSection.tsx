@@ -23,19 +23,19 @@ const reasons = [
     icon: Lightbulb,
     title: "Learn New Skills",
     description:
-      "Attend workshops, get mentorship, and level up your tech stack.",
+      "Challenge yourself, explore new technologies, and level up your tech stack.",
   },
   {
     icon: Rocket,
     title: "Kickstart Your Journey",
     description:
-      "Perfect for 1st year students ready to dive into the tech world.",
+      "Perfect for students ready to dive into the tech world.",
   },
   {
     icon: Heart,
     title: "Have Fun",
     description:
-      "Food, swag, certificates, and unforgettable memories await you.",
+      "Certificates, great company, and unforgettable memories await you.",
   },
 ];
 
