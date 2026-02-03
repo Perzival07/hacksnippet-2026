@@ -36,16 +36,20 @@ export const Navbar = () => {
                 key={link.path}
                 to={link.path}
                 className={`text-sm font-mono transition-all duration-300 hover:text-primary ${location.pathname === link.path
-                    ? "text-primary neon-text"
-                    : "text-muted-foreground"
+                  ? "text-primary neon-text"
+                  : "text-muted-foreground"
                   }`}
               >
                 {link.name}
               </Link>
             ))}
-            <Link to="/register">
+            <a
+              href="https://forms.gle/XY5DyGSMFUhqd6Wh8"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button className="neon-glow font-mono">Register Now</Button>
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -66,17 +70,22 @@ export const Navbar = () => {
                   key={link.path}
                   to={link.path}
                   className={`text-sm font-mono transition-all duration-300 hover:text-primary ${location.pathname === link.path
-                      ? "text-primary neon-text"
-                      : "text-muted-foreground"
+                    ? "text-primary neon-text"
+                    : "text-muted-foreground"
                     }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Link to="/register" onClick={() => setIsOpen(false)}>
+              <a
+                href="https://forms.gle/XY5DyGSMFUhqd6Wh8"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsOpen(false)}
+              >
                 <Button className="w-full neon-glow font-mono">Register Now</Button>
-              </Link>
+              </a>
             </div>
           </div>
         )}

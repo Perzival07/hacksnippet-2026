@@ -1,32 +1,14 @@
 import { Layout } from "@/components/layout/Layout";
-import { Trophy, Medal, Award, Star, Cpu, Globe, Heart, Leaf, GraduationCap } from "lucide-react";
+import { Trophy, Cpu, Globe, Wrench, Sparkles, GraduationCap } from "lucide-react";
 
-const mainPrizes = [
-  {
-    place: "1st Place",
-    prize: "Best Project",
-    icon: Trophy,
-    extras: ["Trophy", "Premium Swag Kit", "Certificate of Excellence"],
-    gradient: "from-yellow-500/20 to-orange-500/20",
-    borderColor: "border-yellow-500/50",
-  },
-  {
-    place: "2nd Place",
-    prize: "Runner Up",
-    icon: Medal,
-    extras: ["Medal", "Swag Kit", "Certificate of Achievement"],
-    gradient: "from-gray-300/20 to-gray-400/20",
-    borderColor: "border-gray-400/50",
-  },
-  {
-    place: "3rd Place",
-    prize: "Second Runner Up",
-    icon: Award,
-    extras: ["Medal", "Swag Pack", "Certificate of Merit"],
-    gradient: "from-orange-600/20 to-orange-700/20",
-    borderColor: "border-orange-600/50",
-  },
-];
+const mainPrize = {
+  place: "Overall Winner",
+  prize: "Best Project",
+  icon: Trophy,
+  extras: ["Trophy", "Premium Swag Kit", "Certificate of Excellence"],
+  gradient: "from-yellow-500/20 to-orange-500/20",
+  borderColor: "border-yellow-500/50",
+};
 
 const categoryPrizes = [
   {
@@ -36,28 +18,23 @@ const categoryPrizes = [
     description: "Most innovative use of artificial intelligence or machine learning",
   },
   {
-    category: "Best Web3 Project",
+    category: "Best AppDev/WebDev Project",
     prize: "Track Winner",
     icon: Globe,
-    description: "Most creative blockchain or decentralized application",
+    description: "Most creative web or mobile application",
   },
   {
-    category: "Best Health Tech",
+    category: "Best Hardware Project",
     prize: "Track Winner",
-    icon: Heart,
-    description: "Most impactful solution for healthcare challenges",
+    icon: Wrench,
+    description: "Most impressive hardware or IoT solution",
   },
   {
-    category: "Best Sustainability Hack",
-    prize: "Track Winner",
-    icon: Leaf,
-    description: "Best project addressing environmental issues",
-  },
-  {
-    category: "People's Choice",
-    prize: "Fan Favorite",
-    icon: Star,
-    description: "Fan favorite voted by all participants",
+    category: "Best UI/UX",
+    prize: "Secret Track Winner",
+    icon: Sparkles,
+    description: "Outstanding user interface and experience design",
+    isSecret: true,
   },
 ];
 
@@ -77,29 +54,26 @@ const Prizes = () => {
             </p>
           </div>
 
-          {/* Main Prizes */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {mainPrizes.map((prize, index) => (
-              <div
-                key={index}
-                className={`glass-effect rounded-lg p-8 text-center hover:neon-glow transition-all duration-300 border ${prize.borderColor} bg-gradient-to-br ${prize.gradient} ${index === 0 ? "md:order-2 md:scale-110" : index === 1 ? "md:order-1" : "md:order-3"}`}
-              >
-                <prize.icon className="h-16 w-16 text-primary mx-auto mb-4" />
-                <h3 className="font-display text-2xl text-foreground mb-2">
-                  {prize.place}
-                </h3>
-                <p className="font-display text-3xl text-primary neon-text mb-4">
-                  {prize.prize}
-                </p>
-                <ul className="font-mono text-sm text-muted-foreground space-y-2">
-                  {prize.extras.map((extra, i) => (
-                    <li key={i} className="flex items-center justify-center gap-2">
-                      <span className="text-primary">+</span> {extra}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* Main Prize */}
+          <div className="flex justify-center mb-16">
+            <div
+              className={`glass-effect rounded-lg p-8 text-center hover:neon-glow transition-all duration-300 border ${mainPrize.borderColor} bg-gradient-to-br ${mainPrize.gradient} max-w-md w-full`}
+            >
+              <mainPrize.icon className="h-20 w-20 text-primary mx-auto mb-4" />
+              <h3 className="font-display text-2xl text-foreground mb-2">
+                {mainPrize.place}
+              </h3>
+              <p className="font-display text-3xl text-primary neon-text mb-4">
+                {mainPrize.prize}
+              </p>
+              <ul className="font-mono text-sm text-muted-foreground space-y-2">
+                {mainPrize.extras.map((extra, i) => (
+                  <li key={i} className="flex items-center justify-center gap-2">
+                    <span className="text-primary">+</span> {extra}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Category Prizes */}
@@ -107,18 +81,25 @@ const Prizes = () => {
             <h2 className="font-display text-2xl md:text-3xl text-center text-primary neon-text mb-8">
               Track Awards
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {categoryPrizes.map((prize, index) => (
                 <div
                   key={index}
-                  className="glass-effect rounded-lg p-6 hover:neon-glow transition-all duration-300"
+                  className={`glass-effect rounded-lg p-6 hover:neon-glow transition-all duration-300 ${prize.isSecret ? "border border-dashed border-primary/50" : ""}`}
                 >
                   <div className="flex items-start gap-4">
                     <prize.icon className="h-10 w-10 text-primary shrink-0" />
                     <div>
-                      <h3 className="font-display text-lg text-foreground mb-1">
-                        {prize.category}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-display text-lg text-foreground">
+                          {prize.category}
+                        </h3>
+                        {prize.isSecret && (
+                          <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-primary/20 text-primary">
+                            🤫 Secret
+                          </span>
+                        )}
+                      </div>
                       <p className="font-display text-xl text-primary">
                         {prize.prize}
                       </p>
@@ -143,7 +124,7 @@ const Prizes = () => {
               HackSnippet 4.0 swag!
             </p>
             <div className="flex flex-wrap justify-center gap-4 font-mono text-sm">
-              {["Certificate", "T-Shirt", "Stickers", "Goodies", "Refreshments"].map(
+              {["Certificate", "Stickers", "Goodies"].map(
                 (item, i) => (
                   <span
                     key={i}

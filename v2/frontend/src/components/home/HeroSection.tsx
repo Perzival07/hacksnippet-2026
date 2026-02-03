@@ -55,7 +55,11 @@ export const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link to="/register">
+            <a
+              href="https://forms.gle/XY5DyGSMFUhqd6Wh8"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
                 size="lg"
                 className="neon-glow font-mono text-lg px-8 py-6"
@@ -63,7 +67,7 @@ export const HeroSection = () => {
                 <Terminal className="mr-2" />
                 Register Now
               </Button>
-            </Link>
+            </a>
             <Link to="/about">
               <Button
                 size="lg"

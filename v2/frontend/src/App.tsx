@@ -9,7 +9,7 @@ import Schedule from "./pages/Schedule";
 import Prizes from "./pages/Prizes";
 import Sponsors from "./pages/Sponsors";
 import FAQ from "./pages/FAQ";
-import Register from "./pages/Register";
+
 import Team from "./pages/Team";
 import NotFound from "./pages/NotFound";
 
@@ -29,7 +29,7 @@ const App = () => (
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/team" element={<Team />} />
-          <Route path="/register" element={<Register />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
