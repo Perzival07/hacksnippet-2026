@@ -529,6 +529,106 @@ const FAQSection = () => {
   );
 };
 
+// Organizers Section
+const OrganizersSection = () => {
+  const organizers = [
+    {
+      name: "Koustav Das",
+      role: "Event Lead",
+      image: "/pfppics/KoustavDas.png"
+    },
+    {
+      name: "Parag Chowdhury",
+      role: "Logistics Lead",
+      image: "/pfppics/ParagChoudhury.png"
+    },
+    {
+      name: "Parambrata Maitra",
+      role: "Design Lead",
+      image: "/pfppics/ParambrataMaitra.png"
+    },
+    {
+      name: "Swapnil Roy",
+      role: "Tech Lead",
+      image: "/pfppics/SwapnilRoy.png"
+    },
+    {
+      name: "Nilanjana Pal",
+      role: "Event Moderator",
+      image: "/pfppics/NilanjanaPal.png"
+    },
+    {
+      name: "Snehesh Gupta",
+      role: "Sponsor Lead",
+      image: "/pfppics/SneheshGupta.png"
+    },
+    {
+      name: "Diptimoyee Patra",
+      role: "Event Moderator",
+      image: "/pfppics/DiptimoyeePatra.png"
+    },
+  ];
+
+  return (
+    <section id="organizers" className="py-20">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-primary neon-text">Get to Know</span> Your Organizers
+          </h2>
+          <p className="font-mono text-muted-foreground max-w-2xl mx-auto">
+            Meet the talented team behind HackSnippet 4.0 who are working tirelessly
+            to make this event an unforgettable experience for you.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {organizers.map((organizer, index) => (
+            <div
+              key={index}
+              className="glass-effect rounded-lg p-6 hover:neon-glow transition-all duration-300 group flex flex-col items-center text-center"
+            >
+              <div className="mb-4 relative">
+                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-primary/30 group-hover:border-primary transition-all duration-300">
+                  <img
+                    src={organizer.image}
+                    alt={organizer.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 24 24' fill='none' stroke='hsl(142 76% 45%)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='5'/%3E%3Cpath d='M20 21a8 8 0 1 0-16 0'/%3E%3C/svg%3E";
+                    }}
+                  />
+                </div>
+                <div className="absolute inset-0 rounded-full border-2 border-primary/0 group-hover:border-primary/50 transition-all duration-300 animate-pulse-glow"></div>
+              </div>
+
+              <h3 className="font-display text-xl text-foreground mb-1 group-hover:text-primary transition-colors duration-300">
+                {organizer.name}
+              </h3>
+              <p className="font-mono text-primary text-lg mb-3">{organizer.role}</p>
+
+              <div className="mt-2">
+                <span className="inline-block h-1 w-16 bg-primary/30 group-hover:bg-primary transition-all duration-300 rounded-full"></span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <p className="font-mono text-muted-foreground max-w-2xl mx-auto">
+            Have questions or want to connect with the organizers?
+            Reach out to us at{' '}
+            <a href="mailto:hacksnippet@gmail.com" className="text-primary hover:underline">
+              hacksnippet@gmail.com
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Main Index Page
 const Index = () => {
   return (
@@ -539,6 +639,7 @@ const Index = () => {
       <ScheduleSection />
       <PrizesSection />
       <SponsorsSection />
+      <OrganizersSection />
       <FAQSection />
     </Layout>
   );

@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Schedule", href: "#schedule" },
   { name: "Prizes", href: "#prizes" },
   { name: "Sponsors", href: "#sponsors" },
+  { name: "Organizers", href: "#organizers" },
   { name: "FAQ", href: "#faq" },
 ];
 
@@ -78,8 +79,8 @@ export const Navbar = () => {
                   scrollToSection(link.href);
                 }}
                 className={`text-sm font-mono transition-all duration-300 hover:text-primary cursor-pointer ${activeSection === link.href.substring(1)
-                    ? "text-primary neon-text"
-                    : "text-muted-foreground"
+                  ? "text-primary neon-text"
+                  : "text-muted-foreground"
                   }`}
               >
                 {link.name}
@@ -114,8 +115,8 @@ export const Navbar = () => {
                     scrollToSection(link.href);
                   }}
                   className={`text-sm font-mono transition-all duration-300 hover:text-primary cursor-pointer ${activeSection === link.href.substring(1)
-                      ? "text-primary neon-text"
-                      : "text-muted-foreground"
+                    ? "text-primary neon-text"
+                    : "text-muted-foreground"
                     }`}
                 >
                   {link.name}

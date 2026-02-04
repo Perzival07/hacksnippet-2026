@@ -36,7 +36,7 @@ export const Footer = () => {
           <div>
             <h4 className="font-display text-primary mb-4">Quick Links</h4>
             <ul className="space-y-2">
-              {["about", "schedule", "prizes", "sponsors", "faq"].map((link) => (
+              {["about", "schedule", "prizes", "sponsors", "organizers", "faq"].map((link) => (
                 <li key={link}>
                   <a
                     href={`#${link}`}
